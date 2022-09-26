@@ -1,5 +1,24 @@
+-- Styling {{{
+local border = {
+    {"┌", "FloatBorder"},
+    {"─", "FloatBorder"},
+    {"┐", "FloatBorder"},
+    {"│", "FloatBorder"},
+    {"┘", "FloatBorder"},
+    {"─", "FloatBorder"},
+    {"└", "FloatBorder"},
+    {"│", "FloatBorder"},
+}
+local signs = { Error = " ", Warn = "", Hint = "", Info = "🞧 " }
+for type, icon in pairs(signs) do
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
+-- }}}
+
+
 local nvim_lsp = require('lspconfig')
-local servers = { 'pyright', 'rust_analyzer' }
+local servers = { 'pyright', 'rust_analyzer', 'eslint', 'jsonls', 'html' }
 
 local on_attach = function (client, bufnr)
     local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
